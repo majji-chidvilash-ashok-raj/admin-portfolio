@@ -1,0 +1,42 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e1a2b;
+}
+
+.log-cont {
+  background: #2c1a3f;
+  padding: 40px;
+  border-radius: 12px;
+  width: 320px;
+  color: white;
+}
+
+.log-cont h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.log-cont form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.log-cont input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.log-cont button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #9333ea;
+  color: white;
+  cursor: pointer;
+}
