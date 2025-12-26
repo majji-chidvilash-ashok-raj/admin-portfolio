@@ -47,7 +47,6 @@ export default function Skills() {
     }
   };
 
-  // Update skill (PROTECTED)
   const updateSkill = async () => {
     if (!editingId) return;
 
@@ -174,7 +173,7 @@ const styles = {
     maxWidth: "800px",
     margin: "0 auto",
     background: "#2c1a3f",
-    padding: "30px",
+    padding: "20px",
     borderRadius: "12px",
     color: "white",
   },
@@ -194,10 +193,11 @@ const styles = {
     display: "flex",
     gap: "10px",
     marginBottom: "25px",
+    flexWrap: "wrap",
   },
 
   input: {
-    flex: 1,
+    flex: "1 1 200px",
     padding: "10px",
     borderRadius: "6px",
     border: "none",
@@ -213,6 +213,7 @@ const styles = {
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
+    flex: "1 1 120px",
   },
 
   updateBtn: {
@@ -222,6 +223,7 @@ const styles = {
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
+    flex: "1 1 120px",
   },
 
   list: {
@@ -232,11 +234,13 @@ const styles = {
   listItem: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-start",
     padding: "15px",
     borderRadius: "8px",
     background: "#1e1a2b",
     marginBottom: "10px",
+    gap: "12px",
+    flexWrap: "wrap",
   },
 
   desc: {
