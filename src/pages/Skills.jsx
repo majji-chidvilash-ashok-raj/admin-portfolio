@@ -4,6 +4,7 @@ import AdminLayout from "../AdminLayout";
 
 export default function Skills() {
   const [skills, setSkills] = useState([]);
+  const [icon, setIcon] = useState("❓");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [editingId, setEditingId] = useState(null);
@@ -33,6 +34,7 @@ export default function Skills() {
       const res = await api.post("/skills", {
         name,
         description,
+        icon
       });
 
       setSkills([res.data.skill, ...skills]);
@@ -58,6 +60,7 @@ export default function Skills() {
       const res = await api.put(`/skills/${editingId}`, {
         name,
         description,
+        icon
       });
 
       setSkills(
@@ -69,13 +72,14 @@ export default function Skills() {
       setEditingId(null);
       setName("");
       setDescription("");
+      setIcon("❓");
       setError("");
     } catch (err) {
       setError("Update failed");
     }
   };
 
-  // Delete skill (PROTECTED)
+
   const deleteSkill = async (id) => {
     try {
       await api.delete(`/skills/${id}`);
@@ -104,6 +108,14 @@ export default function Skills() {
           <input
             style={styles.input}
             type="text"
+            placeholder="icon"
+            value={icon}
+            onChange={(e) => setIcon(e.target.value)}
+          />
+
+          <input
+            style={styles.input}
+            type="text"
             placeholder="Skill description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -124,6 +136,7 @@ export default function Skills() {
           {skills.map((skill) => (
             <li key={skill._id} style={styles.listItem}>
               <div>
+              <p style={styles.desc}>{skill.icon}</p>
                 <strong>{skill.name}</strong>
                 <p style={styles.desc}>{skill.description}</p>
               </div>
@@ -135,6 +148,7 @@ export default function Skills() {
                     setEditingId(skill._id);
                     setName(skill.name);
                     setDescription(skill.description);
+                    setIcon(skill.icon);
                   }}
                 >
                   Edit
