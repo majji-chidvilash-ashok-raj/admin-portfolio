@@ -8,6 +8,7 @@ export default function Education() {
   const [title, setTitle] = useState("");
   const [school, setSchool] = useState("");
   const [year, setYear] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
 
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState("");
@@ -36,6 +37,7 @@ export default function Education() {
         title,
         school,
         year,
+        imgUrl,
       });
 
       setEducation([res.data.education, ...education]);
@@ -53,6 +55,7 @@ export default function Education() {
         title,
         school,
         year,
+        imgUrl,
       });
 
       setEducation(
@@ -81,6 +84,7 @@ export default function Education() {
     setTitle("");
     setSchool("");
     setYear("");
+    setImgUrl("");
     setError("");
   };
 
@@ -113,6 +117,22 @@ export default function Education() {
             onChange={(e) => setYear(e.target.value)}
           />
 
+          <input
+            style={styles.input}
+            placeholder="Image URL"
+            value={imgUrl}
+            onChange={(e) => setImgUrl(e.target.value)}
+          />
+
+          {imgUrl && (
+            <img
+              src={imgUrl}
+              alt="Preview"
+              style={styles.preview}
+              onError={(e) => (e.target.style.display = "none")}
+            />
+          )}
+
           {editingId ? (
             <button style={styles.updateBtn} onClick={updateEducation}>
               Update Education
@@ -127,10 +147,21 @@ export default function Education() {
         <ul style={styles.list}>
           {education.map((e) => (
             <li key={e._id} style={styles.listItem}>
-              <div>
-                <strong>{e.title}</strong>
-                <p style={styles.desc}>{e.school}</p>
-                <small style={styles.meta}>{e.year}</small>
+              <div style={styles.left}>
+                {e.imgUrl && (
+                  <img
+                    src={e.imgUrl}
+                    alt={e.school}
+                    style={styles.image}
+                    onError={(ev) => (ev.target.style.display = "none")}
+                  />
+                )}
+
+                <div>
+                  <strong>{e.title}</strong>
+                  <p style={styles.desc}>{e.school}</p>
+                  <small style={styles.meta}>{e.year}</small>
+                </div>
               </div>
 
               <div>
@@ -141,6 +172,7 @@ export default function Education() {
                     setTitle(e.title);
                     setSchool(e.school);
                     setYear(e.year);
+                    setImgUrl(e.imgUrl || "");
                   }}
                 >
                   Edit
@@ -163,7 +195,7 @@ export default function Education() {
 
 const styles = {
   container: {
-    maxWidth: "800px",
+    maxWidth: "900px",
     margin: "0 auto",
     background: "#2c1a3f",
     padding: "30px",
@@ -194,6 +226,47 @@ const styles = {
     background: "#1e1a2b",
     color: "white",
   },
+  preview: {
+    width: "80px",
+    height: "80px",
+    objectFit: "contain",
+    borderRadius: "8px",
+    background: "#1e1a2b",
+  },
+  list: {
+    listStyle: "none",
+    padding: 0,
+  },
+  listItem: {
+    background: "#1e1a2b",
+    padding: "15px",
+    borderRadius: "8px",
+    marginBottom: "10px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  left: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+  image: {
+    width: "60px",
+    height: "60px",
+    objectFit: "contain",
+    borderRadius: "6px",
+    background: "#0f0a1a",
+  },
+  desc: {
+    fontSize: "14px",
+    color: "#c4b5fd",
+    margin: "4px 0",
+  },
+  meta: {
+    fontSize: "12px",
+    color: "#a78bfa",
+  },
   addBtn: {
     background: "#9333ea",
     color: "white",
@@ -209,28 +282,6 @@ const styles = {
     borderRadius: "6px",
     padding: "10px",
     cursor: "pointer",
-  },
-  list: {
-    listStyle: "none",
-    padding: 0,
-  },
-  listItem: {
-    background: "#1e1a2b",
-    padding: "15px",
-    borderRadius: "8px",
-    marginBottom: "10px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  desc: {
-    fontSize: "14px",
-    color: "#c4b5fd",
-    margin: "4px 0",
-  },
-  meta: {
-    fontSize: "12px",
-    color: "#a78bfa",
   },
   editBtn: {
     marginRight: "8px",
